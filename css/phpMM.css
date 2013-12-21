@@ -1,0 +1,42 @@
+/*
+ * Created By : Daniel Jamison
+ */
+
+body {
+  background-color:#4086cd;
+  margin: 0 68px 0 68px;
+}
+
+div#header {
+  background: #fff url('../images/ic_launcher.png') no-repeat top left;
+  background-size:80px 80px;
+  height: 82px;
+  position: relative;
+  top: 11px;
+  padding: 20px 5px 20px 40px;
+}
+
+#header h1 {
+  position:absolute;
+  left:100px;
+  top:10px;
+}
+
+div#content {
+  background-color:#fff;
+  padding: 20px 40px 20px 40px;
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+form input, form textarea {
+  margin: 5px 0 5px 5px;
+}
+
