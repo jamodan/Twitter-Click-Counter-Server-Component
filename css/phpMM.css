@@ -1,6 +1,9 @@
 /*
  * Created By : Daniel Jamison
  */
+ 
+h1 {color:#4086cd;}
+h1{font-family:Arial;} 
 
 body {
   background-color:#4086cd;
@@ -20,6 +23,7 @@ div#header {
   position:absolute;
   left:100px;
   top:10px;
+  
 }
 
 div#content {

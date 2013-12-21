@@ -40,7 +40,6 @@
 </head>
 
 <body>
-	
    <div id="content">
 		<?php
 		    if(!empty($_SESSION["status"]) || !empty($errorMessage)) 
