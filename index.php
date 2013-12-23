@@ -5,15 +5,22 @@
 	
 	// Start the Session
 	session_start();
+	
+	// Connect to the database
 	require 'scripts/connectNEW.php';
+	
 	$errorMessage = "";
 	
+	// Get all data from the database and sort data from most clicks to least clicks
 	$SQLStatement = "SELECT ProfileName AS 'Name', ClickCount AS 'Click Count', URL AS 'Twitter Profile URL' FROM click_tracker ORDER BY ClickCount DESC;";
 	$report = mysql_query($SQLStatement);
+	
+	// Session variables
 	$_SESSION["save"] = $SQLStatement;
 	$_SESSION["ReportName"] = $ReportName;
 	$_SESSION["error"] = null;
 	
+	// On save button click run script to save data as csv file
 	if($_POST['formSubmit'] == "Save") 
     {
 		
@@ -30,6 +37,8 @@
 			require 'scripts/SaveReport.php';
 		}
 	}
+	
+	// Show non English chars
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />';
 ?>
 
@@ -51,15 +60,18 @@
 		<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
 		<?php if(!empty($report)) :?>
 		<p>Report Name (if saving for future use)</label> <br>
-       <input type="text" name="ReportName" size="40" maxlength="40" value="<?php echo $ReportName;?>" />
-	   <input type="submit" name="formSubmit" value="Save">
-	   </form>
-         <p><b></b></br>
-		 <table border=1 rules="all">
+        <input type="text" name="ReportName" size="40" maxlength="40" value="<?php echo $ReportName;?>" />
+	    <input type="submit" name="formSubmit" value="Save">
+	    
+		<!-- Dynamic table for showing all click results --> 
+		</form>
+			<p><b></b></br>
+			<table border=1 rules="all">
 			<?php
 				$columns = mysql_num_fields($report);
 				echo "<tr>";
 				$temp = 0;
+				// Show column Names
 				while($temp < $columns)
 				{
 					echo "<td><b>".mysql_field_name($report, $temp)."</b></td>";
@@ -72,19 +84,17 @@
 					$temp = 0;
 					while($temp < $columns)
 					{
+						// Make user profile URL clickable
 						echo "<td>".preg_replace('/((http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/', '<a href="\1">\1</a>', $row[$temp])."</td>";
-						//echo "<td>".$row[$temp]."</td>";
 						$temp++;
 					}
 					echo "</tr>";
 				}
-				//echo $report; 
 			?>
 		</table>
-	   <?php endif; ?>
+	    <?php endif; ?>
 			
 		</form>
-		</div>
-
+	</div>
 </body>
 </html>
